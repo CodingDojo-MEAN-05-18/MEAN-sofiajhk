@@ -1,0 +1,15 @@
+*{
+    vertical-align: top;
+    font-style: inherit;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+h1{
+    color: green;
+}
+
+img{
+    width: 200px;
+}

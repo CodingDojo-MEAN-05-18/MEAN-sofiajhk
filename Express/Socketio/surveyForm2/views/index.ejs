@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        // 1. connect to server via sockets
+        var socket = io();
+        
+        // 4. clients 'connected' listener is triggered and sends message that connection has been made!
+        socket.on('connected', function(data){
+            console.log(data.msg)
+        });
+
+        // 5. form submission triggers form data to be emitted to servers w/ event name "posting_form"
+        $('form').submit(function(form){
+            // stops the default action of an element from happening (in this case, prevents submit button from submitting form!)
+            form.preventDefault();
+            
+            var formInfo = {
+                name: $('#name').val(),
+                location: $('#location').val(),
+                language: $('#language').val(),
+                comments: $('#comments').val()
+            }
+            console.log("POST DATA", formInfo)
+            socket.emit('posting_form', formInfo)
+        });
+
+        // 7. client's 'updated_message' listener is triggered and displays message in the HTML
+        socket.on('updated_message', function(data){
+            // JSON.stringify converts JS value to a JSON string
+            $('#updated_message').html("Form has been submitted with the following info:" + JSON.stringify(data.info));
+        });
+        // 6. client's 'random_number' listener is triggered and display random # in the HTML
+        socket.on('random_number', function(data){
+            $('#rand_num').html("The random number is:" + JSON.stringify(data.num));
+        });
+
+
+
+    });
+</script>
+
+    <title>Survey Form</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="updated_message">
+            <!--'updated_message' event data will be displayed here-->
+        </div>
+
+        <div id="rand_num">
+            <!--random number will be displayed here-->
+        </div>
+
+        <h1>Coding Dojo Survey</h1><br><br>
+        <form action="/result" method= "POST">
+            Name: <input type="text" name="name" id="name"><br><br>
+
+            Dojo Location: 
+            <select name="location" id="location">
+                <option value="San Jose">San Jose</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Chicago">Chicago</option>
+            </select><br><br>
+
+            Favorite Language:
+            <select name="language" id="language">
+                <option value="Javascript">Javascript</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="Python">Python</option>
+            </select><br><br>
+        
+            Comments (Optional): <br>
+            <textarea name="comments" id="comments"></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+</body>
+</html>
