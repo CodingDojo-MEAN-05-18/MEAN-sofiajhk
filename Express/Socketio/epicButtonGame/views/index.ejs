@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js'></script>
+    <title>Counter</title>
+    <script>
+
+        $(document).ready(function(){
+            
+            // 1. connect to server via sockets
+            var socket = io();
+
+            // 4. client's 'connected' listener is triggered and sends message that connection has been made!
+            socket.on('connceted', function(data){
+                console.log(data.msg)
+            });
+
+            // 5. epic button click emits 'epic_button' event to be triggered on server=side
+            $('#epic_button').click(function(){
+                socket.emit('epic_button');
+                console.log("Epic Button was clicked!")
+            });
+
+            // 7. client's 'update_count' listener is triggered and updates count in HTML
+            socket.on('update_count', function(num){
+                $('#count').text(num);
+                console.log("Count has been updated to" + num)
+            });
+
+            // 8. reset button click emits 'reset_button' event to be triggered on servver-side
+            $('#reset').click(function(){
+                socket.emit('reset_button');
+                console.log("Reset Button was clicked!")
+            })
+
+            // 10. client's 'reset_count' listener is triggered and updates count to 0
+            socket.on('reset_count', function(num){
+                $('#count').text(num);
+                console.log("Counter has been reset!");
+            });
+            
+        });
+
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Epic Button Game</h1>
+        <h2>You pushed the button <span id="count">0</span> times!</h2><br><br>
+        <p>Push the button to update the count in real-time!</p><br><br>
+        <button id="epic_button">The Epic Button</button><br><br><br>
+        <button id="reset">Reset!</button>
+    </div>
+</body>
+</html>

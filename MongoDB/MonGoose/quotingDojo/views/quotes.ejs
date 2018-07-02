@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Quoting Dojo</title>
+</head>
+<body>
+    <div id="wrapper">
+            <h1>Here are some awesome quotes!</h1><br><br>
+            <!--code to display all submitted quotes-->
+            <% for( var key in context ) { %>
+                <p>"<%= context[key]['quote'] %>"</p>
+                <p>-<%= context[key]['name'] %></p><br><br>
+            <% } %>            
+            <a href='/'>Go to Homepage!</a>
+        </div>
+</body>
+</html>
