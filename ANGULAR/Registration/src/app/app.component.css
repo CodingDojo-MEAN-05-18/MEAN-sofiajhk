@@ -1,0 +1,31 @@
+.ng-valid { } 
+.ng-invalid { } 
+.ng-pristine { } 
+.ng-dirty { } 
+.ng-touched { } 
+.ng-untouched { } 
+
+*{
+    vertical-align: top;
+    font-style: inherit;
+    padding: 0;
+    margin: 0 auto;
+}
+
+#wrapper{
+    width: 800px;
+    text-align: center;
+    padding: 10px;
+}
+
+label, input{
+    margin: 2px;
+}
+
+.error{
+    color: red;
+}
+
+form.ng-pristine .error{
+    display: none;
+}

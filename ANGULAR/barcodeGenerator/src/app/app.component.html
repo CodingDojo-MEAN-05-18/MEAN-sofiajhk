@@ -1,0 +1,11 @@
+<div id="wrapper">
+  <h1>Retro Barcode Generator</h1>
+  <p>Refresh the page to get a new barcode!</p><br>
+
+  <div
+    class="barcode"
+    *ngFor="let color of colorArray"
+    [ngStyle]="{'background-color': color}">
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+*{
+    vertical-align: top;
+    font-style: inherit;
+    border: 0 none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+#wrapper{
+    width: 1000px;
+    text-align: center;
+    padding: 10px;
+}
+
+table, th, td{
+    width: 650px;
+    padding: 3px;
+    outline: 1px solid black;
+}
