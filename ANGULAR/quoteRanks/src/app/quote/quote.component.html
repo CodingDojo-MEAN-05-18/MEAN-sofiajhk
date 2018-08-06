@@ -6,20 +6,22 @@
   </div>
   <form #myForm="ngForm"  novalidate (submit)="onSubmit(myForm)">
     <textarea
+    [(ngModel)]="newQuote.body"
     rows="4" 
     cols="50" 
     name="quote"
     required 
     minlength="4"
-    [(ngModel)]="newQuote.quote"
+    [(ngModel)]="quote.quote"
     #quote="ngModel"
     ></textarea><br>
     <input
+    [(ngModel)]="newQuote.author"
     type="text" 
-    name="author"
+    name="quote"
     required
     minlength="1"
-    [(ngModel)]="newQuote.author"
+    [(ngModel)]="quote.author"
     #author="ngModel"
     ><br>
     <button *ngIf="!myForm.valid" disabled>Submit</button>
@@ -27,20 +29,7 @@
   </form>
      {{ author.errors | json }} {{ author.valid | json }}<br>
      {{ quote.errors | json }} {{ quote.valid | json }}<br>
-     {{ newQuote | json }}
-  <br>
-  <div>
-    <p *ngIf="submitted"> {{ submitted.quote }} by {{ submitted.author }}</p>
-  </div>
-  <!-- <h1>Quotes List</h1>
-  <div class='quote' *ngFor="Let quote of quotes">
-    <div class='content'>
-      <p>{{quote.quote}}</p>
-      <span>- {{quote.author}}</span>
-    </div>
-  </div> -->
+     <!-- {{ quote | json }} -->
 
 
 </div>
-
-
