@@ -1,0 +1,14 @@
+<p>
+  alpha works!
+</p>
+
+<ul>
+  <li *ngFor="let number of numbers">
+    {{ number }}
+  </li>
+</ul>
+
+<!-- create a button with event click that will invoke a method
+which will call a DataService method to add number "1" to data in Service
+(create method in alpha.component.ts)-->
+<button (click)="pushOne()">Push Number 1</button>
